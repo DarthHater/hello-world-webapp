@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+const axios = require('axios')
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     
     this.state = {
       persons: [],
@@ -12,12 +13,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/persons/list')
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ persons: data})
-      })
-      .catch(console.log)
+		axios.get('/persons/list')
+			.then(data => {
+				this.setState({ persons: data })
+			})
+			.catch(console.log)
   }
 
   render() {
@@ -27,8 +27,8 @@ class App extends Component {
             <h1>{x.Person}</h1>
           ))}
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default App;
+export default App
